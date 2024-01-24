@@ -2,51 +2,31 @@ import React from 'react';
 import Testimonials from './components/Testimonials';
 import Header from './components/Header';
 import Doctors from './components/Doctors';
+import EnquiryForm from './components/EnquiryForm';
 
 const App = () => {
   return (
-    <div className="overflow-x-hidden">
+    <div className="overflow-x-hidden ">
       <Header />
-      <div
+    <div
         className="h-svh bg-cover bg-center relative flex md:flex-col"
         style={{
           backgroundImage: "url('herosec.jpg')", // Replace with your actual image path
         }}
       >
-        <div className="absolute inset-0 bg-black opacity-50"></div>
-        <div className="absolute inset-0 flex items-center justify-between ">
-        <div className="w-full ml-20">
-        <p className='text-4xl font-bold text-white ml-5'>Find Best</p>
-        <p className='text-6xl font-bold text-white ml-5'>PhysioTherapists</p>
-        <p className='text-6xl font-bold text-white ml-5'>in your City</p>
-
-        </div>
-          <section className="flex justify-end items-center px-8 py-12 mt-32">
-
-         
-            <div className="max-w-[350px] bg-gray-800 p-6 rounded ">
-              <h2 className="text-lg text-white mb-2">Book an Appointment for</h2>
-              <span className="text-2xl font-bold text-teal-500 mb-6 line-through">Rs 1000</span>
-              <span className="text-2xl font-bold text-white mb-6">FREE</span>
-              <p className="text-sm text-gray-400 mb-4">60+ Expert Physiotherapists for 200+ Conditions</p>
-              <form>
-                <div className="flex flex-col space-y-2">
-                  <input className="bg-gray-700 text-white placeholder-gray-500 p-2 rounded" placeholder="Your Name" type="text" />
-                  <div className="flex items-center">
-                    <div className="bg-gray-700 text-white p-2 rounded">
-                      <div id="country-code">+91</div>
-                    </div>
-                    <input className="bg-gray-700 text-white placeholder-gray-500 flex-grow p-2 ml-2 rounded" placeholder="Phone Number" type="tel" />
-                  </div>
-                  <button className="bg-teal-500 py-2 px-4 cursor-pointer rounded">Start Your Recovery</button>
-                </div>
-              </form>
-              <div className="flex justify-center items-center mt-4 w-full rounded-md	">
-              <img src="physiotherapy_form_trust_image_2.webp" className="rounded-sm" alt="ratings img" />
-              </div>
-            </div>
-          </section>
-        </div>
+     <div className="absolute inset-0 bg-black opacity-50"></div>
+      <div className="absolute inset-0 flex flex-col items-center md:items-center justify-between sm:justify-center  sm:flex-col md:flex-col lg:flex-row 
+        mt-36 sm:mt-42 md:mt-42 lg:mt-46 xl:mt-20"
+      >
+      <div className="w-full lg:ml-20 sm:ml-10 flex-col justify-center ">
+      <p className='text-2xl sm:text-xl md:text-2xl lg:text-4xl xl:text-6xl font-bold text-white lg:ml-5'>Find Best</p>
+      <p className='text-4xl sm:text-5xl md:text-6xl lg:text-10xl xl:text-12xl font-bold text-white lg:ml-5'>PhysioTherapists</p>
+      <p className='text-4xl sm:text-4xl md:text-6xl lg:text-10xl xl:text-12xl font-bold text-white lg:ml-5'>in your City</p>
+      </div>
+    
+        <EnquiryForm/>
+      </div>
+      
       </div>
 
       <div className="bg-gray-950">
