@@ -31,137 +31,152 @@ function getSteps() {
 
 
 const PersonalInfoForm = () => {
-    const { control, setValue, watch } = useFormContext();
+    const { control, setValue, watch, formState: { errors } } = useFormContext();
     const [countries] = useState(['India', 'USA', 'UK']); // Add your country list here
 
     const selectedCountry = watch('country');
 
+
+
     return (
         <>
-            <div className="text-white mb-0">
+        <div className="text-white mb-0">
             <div className="text-white">
-            <h2 className="text-lg text-white ">Book an Appointment for</h2>
-            <span className="text-xl md:text-xl font-bold text-teal-500 line-through">Rs 1000</span>
-            <span className="text-xl md:text-xl font-bold text-white ">FREE</span>
-            <p className="text-sm md:text-base text-gray-400 -mb-4">60+ Expert Physiotherapists for 200+ Conditions</p>
-           </div>
-           <div className="px-5 ">
-            <Controller
-            control={control}
-            name="fullName"
-            render={({ field }) => (
-                <TextField
-                    id="full-name"
-                    label={<span style={{ color: 'white' }}>FullName</span>}
-                    InputProps={{
-                        inputProps: {
-                            style: {
-                                borderBottom: '1px solid white',
-                                color: 'white',
-                            },
-                        },
-                    }}
-                    variant="standard"
-                    placeholder="Enter Your Full Name"
-                    fullWidth
-                    margin="normal"
-                    value={field.value || ''} // Ensure value is always defined
-                    onChange={(e) => setValue('fullName', e.target.value)}
-                />
-            )}
-        />
-        </div>
+                <h2 className="text-lg text-white ">Book an Appointment for</h2>
+                <span className="text-xl md:text-xl font-bold text-teal-500 line-through">Rs 1000</span>
+                <span className="text-xl md:text-xl font-bold text-white ">FREE</span>
+                <p className="text-sm md:text-base text-gray-400 -mb-4">60+ Expert Physiotherapists for 200+ Conditions</p>
             </div>
-
-            <div className="flex flex-row text-white px-5 mb-5 -mt-4 ">
-                <div className="w-16">
-                    <Controller
-                        control={control}
-                        name="country"
-                        render={({ field }) => (
-                            <TextField
-                                id="country"
-                                label={<span style={{ color: 'white' }}>Country</span>} // Override label color to white
-                                variant="standard"
-                                className="text-white"
-                                select
-                                InputProps={{
-                                    inputProps: { // Target underlying input element props
-                                        style: {
-                                            borderBottom: '1px solid white', // Set underline color to white
-                                            color: 'white', // Set text color to white
-                                        },
-                                    },
-                                }}
-                                fullWidth
-                                margin="normal"
-                                {...field}
-                            >
-                                {countries.map((country) => (
-                                    <MenuItem key={country} value={country} >
-                                        {country}
-                                    </MenuItem>
-                                ))}
-                            </TextField>
-                        )}
-                    />
-                </div>
-
+            <div className="px-5 ">
                 <Controller
                     control={control}
-                    name="phoneNumber"
+                    name="fullName"
+                    rules={{ required: "This field is required." }}
                     render={({ field }) => (
                         <TextField
-                            id="phone-number"
+                            id="full-name"
+                            label={<span style={{ color: 'white' }}>FullName</span>}
                             InputProps={{
-                                inputProps: { // Target underlying input element props
+                                inputProps: {
                                     style: {
-                                        borderBottom: '1px solid white', // Set underline color to white
-                                        color: 'white', // Set text color to white
+                                        borderBottom: '1px solid white',
+                                        color: 'white',
+                                        ...(field.error ? { borderColor: 'red' } : {}),
                                     },
                                 },
                             }}
-
-
-                            label={<span style={{ color: 'white' }}>Phone</span>} // Override label color to white
                             variant="standard"
-                            placeholder="Enter Your Phone Number"
+                            placeholder="Enter Your Full Name"
                             fullWidth
                             margin="normal"
-                            {...field}
+                            value={field.value || ''}
+                            onChange={(e) => setValue('fullName', e.target.value)}
+                            error={Boolean(errors?.fullName)}
+                            helperText={errors.fullName?.message}
                         />
                     )}
                 />
             </div>
+        </div>
 
-            {/* Image at the end of the form */}
-            <div className="flex justify-center items-center  ">
-                <img src="physiotherapy_form_trust_image_2.webp" alt="Your Image" className="rounded" />
+        <div className="flex flex-row text-white px-5 mb-5 -mt-4 ">
+            <div className="w-16">
+                <Controller
+                    control={control}
+                    name="country"
+                    rules={{ required: "This field is required." }}
+                    defaultValue={countries[0]}
+                    render={({ field }) => (
+                        <TextField
+                            id="country"
+                            label={<span style={{ color: 'white' }}>Country</span>}
+                            variant="standard"
+                            className="text-white"
+                            select
+                            InputProps={{
+                                inputProps: {
+                                    style: {
+                                        borderBottom: '1px solid white',
+                                        color: 'white',
+                                        ...(field.error ? { borderColor: 'red' } : {}),
+                                    },
+                                },
+                            }}
+                            fullWidth
+                            margin="normal"
+                            {...field}
+                            error={Boolean(errors?.country)}
+                            helperText={errors.country?.message}
+                        >
+                            {countries.map((country) => (
+                                <MenuItem key={country} value={country}>
+                                    {country}
+                                </MenuItem>
+                            ))}
+                        </TextField>
+                    )}
+                />
             </div>
-        </>
+
+            <Controller
+                control={control}
+                name="phoneNumber"
+                rules={{ required: "This field is required." }}
+                defaultValue=""
+                render={({ field }) => (
+                    <TextField
+                        id="phone-number"
+                        InputProps={{
+                            inputProps: {
+                                style: {
+                                    borderBottom: '1px solid white',
+                                    color: 'white',
+                                    ...(field.error ? { borderColor: 'red' } : {}),
+                                },
+                            },
+                        }}
+                        label={<span style={{ color: 'white' }}>Phone</span>}
+                        variant="standard"
+                        placeholder="Enter Your Phone Number"
+                        fullWidth
+                        margin="normal"
+                        {...field}
+                        error={Boolean(errors?.phoneNumber)}
+                        helperText={errors.phoneNumber?.message || 'Incorrect phone number'}
+                    />
+                )}
+            />
+        </div>
+
+        {/* Image at the end of the form */}
+        <div className="flex justify-center items-center  ">
+            <img src="physiotherapy_form_trust_image_2.webp" alt="Your Image" className="rounded" />
+        </div>
+    </>
     );
 };
 
 
 const AgeOccupationForm = () => {
-    const { control } = useFormContext();
+    const { control, formState: { errors } } = useFormContext();
+
     return (
         <>
-
-      
             <Controller
                 control={control}
                 name="age"
+                rules={{ required: "This field is required." }}
                 render={({ field }) => (
                     <TextField
                         id="age"
-                        label={<span style={{ color: 'white' }}>Age</span>} // Override label color to white
+                        label={<span style={{ color: 'white' }}>Age</span>}
                         variant="standard"
                         InputProps={{
                             inputProps: {
                                 style: {
                                     borderBottom: '1px solid white',
                                     color: 'white',
+                                    ...(field.error ? { borderColor: 'red' } : {}),
                                 },
                             },
                         }}
@@ -169,6 +184,8 @@ const AgeOccupationForm = () => {
                         fullWidth
                         margin="normal"
                         {...field}
+                        error={Boolean(errors?.age)}
+                        helperText={errors.age?.message}
                     />
                 )}
             />
@@ -176,16 +193,18 @@ const AgeOccupationForm = () => {
             <Controller
                 control={control}
                 name="occupation"
+                rules={{ required: "This field is required." }}
                 render={({ field }) => (
                     <TextField
                         id="occupation"
-                        label={<span style={{ color: 'white' }}>Occupation</span>} // Override label color to white
+                        label={<span style={{ color: 'white' }}>Occupation</span>}
                         variant="standard"
                         InputProps={{
                             inputProps: {
                                 style: {
                                     borderBottom: '1px solid white',
                                     color: 'white',
+                                    ...(field.error ? { borderColor: 'red' } : {}),
                                 },
                             },
                         }}
@@ -193,6 +212,8 @@ const AgeOccupationForm = () => {
                         fullWidth
                         margin="normal"
                         {...field}
+                        error={Boolean(errors?.occupation)}
+                        helperText={errors.occupation?.message}
                     />
                 )}
             />
@@ -200,16 +221,18 @@ const AgeOccupationForm = () => {
             <Controller
                 control={control}
                 name="problemDescription"
+                rules={{ required: "This field is required." }}
                 render={({ field }) => (
                     <TextField
                         id="problem-description"
-                        label={<span style={{ color: 'white' }}>Whats your problem</span>} // Override label color to white
+                        label={<span style={{ color: 'white' }}>Whats your problem</span>}
                         variant="standard"
                         InputProps={{
                             inputProps: {
                                 style: {
                                     borderBottom: '1px solid white',
                                     color: 'white',
+                                    ...(field.error ? { borderColor: 'red' } : {}),
                                 },
                             },
                         }}
@@ -219,6 +242,8 @@ const AgeOccupationForm = () => {
                         rows={4}
                         margin="normal"
                         {...field}
+                        error={Boolean(errors?.problemDescription)}
+                        helperText={errors.problemDescription?.message}
                     />
                 )}
             />
@@ -226,8 +251,11 @@ const AgeOccupationForm = () => {
     );
 };
 
+
+
 const PainIntensityForm = () => {
-    const { control } = useFormContext();
+    const { control, formState: { errors } } = useFormContext();
+    
     return (
         <>
             <Typography variant="h6" style={{ color: 'white' }}>
@@ -236,6 +264,7 @@ const PainIntensityForm = () => {
             <Controller
                 control={control}
                 name="painIntensity"
+                rules={{ required: "This field is required." }}
                 render={({ field }) => (
                     <RadioGroup {...field} row>
                         {[1, 2, 3, 4, 5].map((value) => (
@@ -249,36 +278,34 @@ const PainIntensityForm = () => {
                     </RadioGroup>
                 )}
             />
-
-            <Typography variant="h6" style={{ color: 'white' }}>
-                How long have you been experiencing the problem?
-            </Typography>
-            <Controller
-                control={control}
-                name="problemDuration"
-                render={({ field }) => (
-                    <RadioGroup {...field} row>
-                        {['20 days', '60 days', '100 days', '200 days', '365 days'].map((value) => (
-                            <FormControlLabel
-                                key={value}
-                                value={value}
-                                control={<Radio style={{ color: 'white' }} />}
-                                label={value}
-                            />
-                        ))}
-                    </RadioGroup>
-                )}
-            />
+            {errors.painIntensity && (
+                <Typography variant="body2" color="error" gutterBottom>
+                    {errors.painIntensity.message}
+                </Typography>
+            )}
         </>
     );
 };
 
+
+
 const SlotSelectionForm = () => {
+    const { control, formState: { errors }, getValues } = useFormContext();
+
     const days = ['23 Jan (today)', '24 Jan (tomorrow)'];
     const slots = [
         ['8:00 AM', '8:30 AM', '8:45 AM', '9:00 AM', '9:15 AM', '9:30 AM', '9:45 AM'],
         ['9:00 AM', '9:30 AM', '8:45 AM', '8:00 AM', '9:15 AM', '9:30 AM', '9:45 AM'],
     ];
+
+    const isAnySlotSelectedInCurrentArray = (currentArrayIndex) => {
+        for (let slotIndex = 0; slotIndex < slots[currentArrayIndex].length; slotIndex++) {
+            if (getValues(`selectedSlot[${currentArrayIndex}][${slotIndex}]`)) {
+                return true; // At least one slot is selected in the current array
+            }
+        }
+        return false; // No slot is selected in the current array
+    };
 
     return (
         <>
@@ -291,22 +318,51 @@ const SlotSelectionForm = () => {
                         <Typography variant="subtitle1" style={{ color: 'white' }}>
                             {day}
                         </Typography>
-                        <RadioGroup className="overflowX: 'scroll'">
-                            {slots[index].map((slot, slotIndex) => (
-                                <FormControlLabel
-                                    key={slotIndex}
-                                    value={slot}
-                                    control={<Radio style={{ color: 'white' }} />}
-                                    label={slot}
-                                />
-                            ))}
-                        </RadioGroup>
+                        <Controller
+                            control={control}
+                            name={`selectedSlot[${index}]`}
+                            rules={{
+                                validate: () => {
+                                    if (isAnySlotSelectedInCurrentArray(index)) {
+                                        return true; // Validation passed for the current array
+                                    }
+
+                                    // Check if any slot is selected in the other array
+                                    const otherArrayIndex = index === 0 ? 1 : 0;
+                                    for (let slotIndex = 0; slotIndex < slots[otherArrayIndex].length; slotIndex++) {
+                                        if (getValues(`selectedSlot[${otherArrayIndex}][${slotIndex}]`)) {
+                                            return true; // Validation passed for the other array
+                                        }
+                                    }
+
+                                    return 'Please select at least one slot'; // Validation failed
+                                },
+                            }}
+                            render={({ field }) => (
+                                <RadioGroup {...field} className="overflowX: 'scroll'">
+                                    {slots[index].map((slot, slotIndex) => (
+                                        <FormControlLabel
+                                            key={slotIndex}
+                                            value={slot}
+                                            control={<Radio style={{ color: 'white' }} />}
+                                            label={slot}
+                                        />
+                                    ))}
+                                </RadioGroup>
+                            )}
+                        />
+                        {errors.selectedSlot && errors.selectedSlot[index] && (
+                            <Typography variant="body2" color="error" gutterBottom>
+                                {errors.selectedSlot[index].message}
+                            </Typography>
+                        )}
                     </div>
                 ))}
             </div>
         </>
     );
 };
+
 
 const ConfirmationForm = ({ fullName }) => {
     return (
@@ -349,12 +405,17 @@ const LinearStepper = () => {
     const [activeStep, setActiveStep] = useState(0);
     const [skippedSteps, setSkippedSteps] = useState([]);
     const [fullName, setFullName] = useState('');
+    
 
     const steps = ['Contact', 'Problem', 'Concerns', 'Consultation', 'booked'];
 
     const isStepOptional = (step) => {
         return step === 0; // You can modify this based on your requirements
     };
+
+    const isStepFalied = () => {
+        return Boolean(Object.keys(methods.formState.errors).length);
+      };
 
     const isStepSkipped = (step) => {
         return skippedSteps.includes(step);
@@ -387,6 +448,9 @@ const LinearStepper = () => {
                         if (isStepSkipped(index)) {
                             stepProps.completed = false;
                         }
+                          if (isStepFalied() && activeStep == index) {
+            labelProps.error = true;
+          }
                         return (
                             index !== steps.length - 1 && ( // Exclude ConfirmationForm from stepper
                                 <Step key={label} {...stepProps}>

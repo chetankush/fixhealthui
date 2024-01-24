@@ -65,9 +65,9 @@ const Doctors = () => {
                                 alt={`Image of ${expert.name}`}
                                 className="rounded-md w-full h-44 object-cover mb-4"
                             />
-                            <h5 className="text-lg font-semibold mb-1">{expert.full_name}</h5>
+                            <h5 className="text-lg font-semibold mb-1">{expert.name}</h5>
                             <span className="text-sm text-[#424242]">
-                                {expert.profession}
+                                {expert.specialization}
                             </span>
                             <div className="text-sm text-[#424242]">
                                 Rating: {expert.rating}
