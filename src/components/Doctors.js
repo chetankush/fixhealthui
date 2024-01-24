@@ -30,9 +30,9 @@ const Doctors = () => {
 
     return (
         <div>
-            <div className="py-14">
+            <div className="py-12 mt-24 md:mt-20">
                 <div className='text-center py-2 pb-5'>
-                    <h2 className="text-center text-3xl text-white font-semibold mb-6">
+                    <h2 className="text-center text-3xl text-white font-semibold mb-10">
                         Search Expert Doctors in your city
                     </h2>
                     <div className="w-full flex flex-wrap justify-center">
@@ -54,7 +54,7 @@ const Doctors = () => {
                     </div>
                 </div>
 
-                <div className="flex overflow-x-auto no-scrollbar w-svw space-x-6 px-14 mt-4">
+                <div className="flex overflow-x-auto no-scrollbar w-svw space-x-6 px-10 mt-4">
                     {sortedExperts.map((expert, index) => (
                         <div
                             key={index}

@@ -36,7 +36,7 @@ const Header = () => {
       <div className='max-w-32 pt-2 min-w-1'>
         <img src="logofixhealth.svg" alt="" />
       </div>
-      <nav className="text-sm hidden md:flex">
+      <nav className="text-sm hidden md:flex justify-center items-center">
         <span className="mr-6">Home</span>
         <span className="mr-6">Services</span>
         <span className="mr-6">Blogs</span>

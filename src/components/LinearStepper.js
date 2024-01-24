@@ -38,8 +38,14 @@ const PersonalInfoForm = () => {
 
     return (
         <>
-            <div className="text-white px-5">
-
+            <div className="text-white mb-0">
+            <div className="text-white">
+            <h2 className="text-lg text-white ">Book an Appointment for</h2>
+            <span className="text-xl md:text-xl font-bold text-teal-500 line-through">Rs 1000</span>
+            <span className="text-xl md:text-xl font-bold text-white ">FREE</span>
+            <p className="text-sm md:text-base text-gray-400 -mb-4">60+ Expert Physiotherapists for 200+ Conditions</p>
+           </div>
+           <div className="px-5 ">
             <Controller
             control={control}
             name="fullName"
@@ -64,9 +70,10 @@ const PersonalInfoForm = () => {
                 />
             )}
         />
+        </div>
             </div>
 
-            <div className="flex flex-row text-white px-5 mb-5 ">
+            <div className="flex flex-row text-white px-5 mb-5 -mt-4 ">
                 <div className="w-16">
                     <Controller
                         control={control}
@@ -128,7 +135,7 @@ const PersonalInfoForm = () => {
             </div>
 
             {/* Image at the end of the form */}
-            <div className="flex justify-center items-center mt-6 pt-8 ">
+            <div className="flex justify-center items-center  ">
                 <img src="physiotherapy_form_trust_image_2.webp" alt="Your Image" className="rounded" />
             </div>
         </>
@@ -140,6 +147,8 @@ const AgeOccupationForm = () => {
     const { control } = useFormContext();
     return (
         <>
+
+      
             <Controller
                 control={control}
                 name="age"
@@ -368,8 +377,8 @@ const LinearStepper = () => {
     };
 
     return (
-        <section className="flex justify-center items-center px-8 py-12 bg-transparent text-white">
-            <div className="w-[400px] bg-gray-800 rounded-lg px-8 py-10 text-white">
+        <section className="flex justify-center items-center px-8 py-6 bg-transparent text-white">
+            <div className="lg:w-[400px] bg-gray-800 rounded-lg px-8 py-8 text-white">
                 <Stepper alternativeLabel activeStep={activeStep} style={{ color: 'white' }}>
                     {steps.map((label, index) => {
                         const labelProps = {};
@@ -392,20 +401,20 @@ const LinearStepper = () => {
                 ) : (
                     <FormProvider {...methods}>
                         <form onSubmit={methods.handleSubmit(handleNext)} >
-                            <div className="flex flex-col space-y-1 py-2 text-white ">
+                            <div className="flex flex-col  text-white">
                                 {activeStep === 0 && <PersonalInfoForm />}
                                 {activeStep > 0 && getStepContent(activeStep)}
 
-                                <div className="flex justify-between pt-6">
+                                <div className="flex justify-between pt-4">
                                     <Button
-                                        className="bg-teal-500 py-2 px-4 cursor-pointer rounded"
+                                        className="bg-teal-500 px-4 space-y-1 cursor-pointer rounded"
                                         disabled={activeStep === 0}
                                         onClick={handleBack}
                                     >
                                         Back
                                     </Button>
                                     <Button
-                                        className="bg-teal-500 py-2 px-4 cursor-pointer rounded"
+                                        className="bg-teal-500 px-4 cursor-pointer rounded"
                                         variant="contained"
                                         type="submit"
                                     >

@@ -9,7 +9,7 @@ function EnquiryForm() {
   return (
     <>
       <CssBaseline />
-      <Container component={Box} p={2} style={{ width: "100%", maxWidth: "550px", margin: "auto", marginRight: "20px" }}>
+      <Container component={Box} p={2} style={{ width: "100%", maxWidth: "450px", margin: "auto", marginRight: "20px", marginTop:"0px" }}>
        <Paper component={Box} p={2} style={{ borderRadius: "20px", backgroundColor: "transparent", boxShadow: "none" }}>
           <LinearStepper />
         </Paper>

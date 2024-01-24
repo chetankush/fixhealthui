@@ -3,19 +3,19 @@ import React from 'react';
 const Testimonials = () => {
   const testimonials = [
     {
-      name: "Alice",
+      name: "Raman",
       review: "Excellent service! Highly recommend.",
       date: "January 12, 2023",
       image: "t1.jpg",
     },
     {
-      name: "Bob",
+      name: "Madhur",
       review: "The staff was very kind and professional.",
       date: "February 9, 2023",
       image: "t2.jpg",
     },
     {
-      name: "Charlie",
+      name: "Kriti",
       review: "I had a great experience from start to finish.",
       date: "March 15, 2023",
       image: "t3.jpg",
